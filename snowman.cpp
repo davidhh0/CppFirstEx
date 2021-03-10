@@ -4,15 +4,16 @@
 #include <cmath>
 
 const int TEN = 10;
-const int EIGHT = 8;
-const int SEVEN=7;
-const int SIX=6;
-const int FIVE=5;
+const int NUMBER_OF_DIGITSs = 8;
+const int HAT_DIGIT=7;
+const int NOSE_DIGIT=6;
+const int LEFT_EYE_DIGIT=5;
 //#include "snowman.hpp"
 
 using namespace std;
 using std::string;
 
+// Checking each digits in [1,4]
 int checkDigits(int n) {
     while (n != 0) {
         int temp = n % TEN;
@@ -23,7 +24,7 @@ int checkDigits(int n) {
     }
     return 1;
 }
-
+// Return number of digits
 int countDigit(int n) {
     int count = 0;
     while (n != 0) {
@@ -32,7 +33,7 @@ int countDigit(int n) {
     }
     return count;
 }
-
+// Return digits at index
 int digitsInIndex(int n, int index) {
     int ten = pow(TEN, index);
     int number = n / ten;
@@ -104,9 +105,9 @@ namespace ariel {
         int numberOfDigits = countDigit(n);
         int tempN = n;
         string invalidString = "Invalid code " + to_string(n);
-        if (numberOfDigits < EIGHT) {
+        if (numberOfDigits < NUMBER_OF_DIGITSs) {
             throw std::invalid_argument(invalidString);
-        }if (numberOfDigits > EIGHT) {
+        }if (numberOfDigits > NUMBER_OF_DIGITSs) {
             throw std::invalid_argument(invalidString);
         } if (n < 0) {
             throw std::invalid_argument(invalidString);
@@ -114,11 +115,12 @@ namespace ariel {
             throw std::invalid_argument(invalidString);
         }
         bool isLeftArm = (digitsInIndex(n, 3) == 4);
-		//!!!!!!DAVID !!!!!  REMEMBER TO INIT IF THERE IS ANY PROBLEM BECAUSE OF THE WARNING!!
+		
         std::string toReturn;
+		
 
         // switch for hat
-        switch (digitsInIndex(n, SEVEN)) {
+        switch (digitsInIndex(n, HAT_DIGIT)) {
             case 1:
                 if (isLeftArm){
                     toReturn += hatwithleftarmdisabled::one;
@@ -155,13 +157,14 @@ namespace ariel {
                 break;
         }
         // Left arm check for up arm
+		// digitsInIndex(n, 3) == 2 -> there is a char up
         if (digitsInIndex(n, 3) == 2) {
             toReturn += leftarm::two;
-        } else if (digitsInIndex(n, 3) != 4) {
+        } else if (!isLeftArm) { // Meaning that there is an hand
             toReturn += " ";
         }
         // Left eye full check
-        switch (digitsInIndex(n, FIVE)) {
+        switch (digitsInIndex(n, LEFT_EYE_DIGIT)) {
             case 1:
                 toReturn += lefteye::one;
                 break;
@@ -178,7 +181,7 @@ namespace ariel {
                 break;
         }
         // Nose full check
-        switch (digitsInIndex(n, SIX)) {
+        switch (digitsInIndex(n, NOSE_DIGIT)) {
             case 1:
                 toReturn += nose::one;
                 break;
@@ -214,7 +217,7 @@ namespace ariel {
                 break;
         }
 
-        if (digitsInIndex(n, 2) == 2) {
+        if (digitsInIndex(n, 2) == 2) { // digitsInIndex(n, 3) == 2 -> there is a char up
             toReturn += rightarm::two;
         } else{
             toReturn += "\n";
@@ -272,7 +275,7 @@ namespace ariel {
                 break;
         }
 
-        if (digitsInIndex(n, 3) != 4) {
+        if (!isLeftArm) {
             toReturn += " ";
         }
 
