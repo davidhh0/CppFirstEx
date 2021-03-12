@@ -51,20 +51,23 @@ TEST_CASE("Bad snowman code") {
  }
 
 TEST_CASE("Good snowman code"){
-
+	// My own built snowmen
 	CHECK((snowman(11114411)) == string("_===_\n(.,.)\n( : )\n( : )"));
 	
 	CHECK((snowman(12341234)) == string(" _===_\n (O.-)/\n<(> <)\n (   )"));
 	
 	CHECK((snowman(11111111)) == string(" _===_\n (.,.)\n<( : )>\n ( : )"));
 	
+	
 	//got from the internet 
+	// copies each line without any spaces and put \n between
 	CHECK((snowman(12333321)) == string(" _===_\n (O.O)\n/(] [)\\\n ( : )"));
 	
+	// Left arm is up
 	CHECK((snowman(11112311)) == string(" _===_\n\\(.,.)\n ( : )\\\n ( : )"));
-	
+	// Left arm is disable
 	CHECK((snowman(44444444)) == string(" ___\n(_*_)\n(- -)\n(   )\n(   )"));
-	
+	//Left arm is on but not disable
 	CHECK((snowman(31333342)) == string("   _\n  /_\\\n (O,O)\n/(   )\\\n (\" \")"));
 	
 	CHECK((snowman(43232122)) == string("  ___\n (_*_)\n\\(o_O)\n (] [)>\n (\" \")"));
